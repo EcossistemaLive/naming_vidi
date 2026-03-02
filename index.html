@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Naming - Live Consultoria</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* 1. THE SETUP & LIVE CONSULTORIA V6.0 VARIABLES */
+        :root {
+            /* Atmosfera (Backgrounds) */
+            --live-deep: #06192a;
+            --live-dark: #030d17;
+            /* Superfícies (Refractive Glass) */
+            --live-glass: rgba(10, 36, 61, 0.70);
+            --live-glass-hover: rgba(15, 45, 75, 0.85);
+            /* Distorção simulada para refração */
+            --glass-blur: blur(16px) saturate(180%);
+            /* Luz & Ação */
+            --live-accent: #00e800;
+            --live-accent-dim: rgba(0, 232, 0, 0.15);
+            /* Gradiente Cinético para Títulos */
+            --kinetic-gradient: linear-gradient(90deg, #ffffff 0%, #cccccc 40%, #00e800 100%);
+            /* Física de Animação (Micro-Springs) */
+            --spring-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --ease-fluid: cubic-bezier(0.4, 0.0, 0.2, 1);
+            /* Bordas Inteligentes */
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-active: rgba(0, 232, 0, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--live-dark);
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            background-attachment: fixed;
+            color: #cbd5e1;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 2. CONSISTENT TYPOGRAPHY */
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin: 0;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+
+        p, li, .subtitle, th, td {
+            font-family: 'Merriweather', serif;
+            color: #cbd5e1;
+            line-height: 1.7;
+            font-size: 18px;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        strong { color: #ffffff; font-weight: 700; }
+
+        /* Comportamento Cinético: Gradiente Animado */
+        .kinetic-text {
+            background: var(--kinetic-gradient);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: kineticFlow 6s linear infinite;
+        }
+
+        @keyframes kineticFlow {
+            to { background-position: 200% center; }
+        }
+
+        /* 3. SCROLLING SECTIONS LAYOUT */
+        .page-section {
+            position: relative;
+            padding: 100px 20px;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .page-section:nth-child(even) {
+            background-color: rgba(6, 25, 42, 0.4); /* Leve variação de fundo para alternância */
+        }
+
+        /* Luz Dinâmica de Fundo */
+        .page-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            max-width: 1200px;
+            background: radial-gradient(circle at center, var(--live-accent-dim), transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 44px;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        /* 4. COMPONENTS AND MICRO-INTERACTIONS */
+        .glass-panel {
+            background: var(--live-glass);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 40px;
+            transition: transform 0.4s var(--spring-bounce), border-color 0.4s var(--ease-fluid), background 0.4s var(--ease-fluid);
+        }
+
+        .glass-panel:hover {
+            transform: translateY(-6px) scale(1.01);
+            border-color: var(--border-active);
+            background: var(--live-glass-hover);
+        }
+
+        /* LAYOUT DEFINITIONS */
+        .hero-layout {
+            text-align: center;
+            padding: 150px 20px;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-layout .logo-hero {
+            width: 280px;
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero-layout h1 {
+            font-size: 64px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-layout .subtitle {
+            font-size: 24px;
+            color: #94a3b8;
+            font-family: 'Poppins', sans-serif;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .two-column ul {
+            padding-left: 20px;
+            list-style-type: none;
+        }
+
+        .two-column li {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .two-column li::before {
+            content: '>';
+            color: var(--live-accent);
+            position: absolute;
+            left: -20px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        .image-wrapper {
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .image-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 232, 0, 0.1), transparent);
+            pointer-events: none;
+        }
+
+        .image-wrapper img {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: cover;
+            filter: grayscale(20%) contrast(110%);
+            transition: filter 0.5s ease, transform 0.5s ease;
+        }
+        
+        .image-wrapper:hover img {
+            filter: grayscale(0%) contrast(100%);
+            transform: scale(1.03);
+        }
+
+        .tiled-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .tiled-content .glass-panel {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tile-icon {
+            font-size: 36px;
+            color: var(--live-accent);
+            margin-bottom: 20px;
+        }
+
+        .tiled-content h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--live-accent);
+        }
+
+        .rounded-image-layout .image-wrapper {
+            border-radius: 50%;
+            aspect-ratio: 1 / 1;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            border: 2px solid var(--live-accent);
+            box-shadow: 0 0 30px rgba(0, 232, 0, 0.2);
+        }
+
+        /* Table Layout */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--live-glass);
+            backdrop-filter: var(--glass-blur);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+        }
+        th, td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        th {
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--live-accent);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: rgba(255, 255, 255, 0.03); }
+
+        /* Highlight Numbers Layout */
+        .highlight-numbers-layout {
+            display: flex;
+            gap: 40px;
+        }
+        .highlight-card {
+            flex: 1;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .highlight-card .number {
+            font-size: 80px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+        .highlight-card .number-label {
+            font-size: 24px;
+            color: var(--live-accent);
+            font-family: 'Poppins', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Q&A / Closure Layout */
+        .closure-layout {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 0;
+        }
+        .closure-layout h2 {
+            font-size: 72px;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+        .closure-layout p {
+            font-size: 28px;
+            margin-top: 30px;
+        }
+        .signature {
+            margin-top: 60px;
+            color: var(--live-accent);
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+
+        /* Global Footer */
+        .global-footer {
+            background-color: #020810;
+            border-top: 1px solid var(--border-subtle);
+            padding: 40px 20px;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            color: #64748b;
+        }
+        .global-footer .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .global-footer a {
+            color: var(--live-accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .global-footer a:hover {
+            color: #ffffff;
+        }
+        .footer-logo {
+            height: 30px;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        .footer-logo:hover {
+            opacity: 1;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 992px) {
+            .hero-layout h1 { font-size: 48px; }
+            .section-title { font-size: 36px; }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .tiled-content {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            
+            .highlight-numbers-layout {
+                flex-direction: column;
+            }
+            
+            .closure-layout h2 { font-size: 50px; }
+        }
+
+        @media (max-width: 768px) {
+            .page-section { padding: 60px 20px; }
+            .hero-layout { padding: 100px 20px 60px; min-height: auto; }
+            .hero-layout h1 { font-size: 38px; }
+            .hero-layout .subtitle { font-size: 18px; }
+            .section-title { font-size: 32px; margin-bottom: 30px; }
+            
+            .global-footer .footer-content {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="page-section" style="border-bottom: none;">
+        <div class="content-wrapper hero-layout">
+            <img class="logo-hero" src="https://raw.githubusercontent.com/Clebito2/ConsultoriaLive/main/Logo%20live%20oficial-21.png" alt="Live Consultoria Logo">
+            <h1 class="kinetic-text">Relatório de Pesquisa de Naming e Conceito</h1>
+            <p class="subtitle">Análise de Mitra, VIDI, Cúpula e Decisão Estratégica</p>
+        </div>
+    </header>
+
+    <!-- Section 1: O Conceito Mitra -->
+    <section class="page-section">
+        <div class="content-wrapper">
+            <h2 class="section-title kinetic-text">O Conceito "Mitra"</h2>
+            <div class="two-column">
+                <div>
+                    <p>Durante o brainstorm, o nome <strong>Mitra</strong> foi explorado como uma representação absoluta de <strong>Autoridade e Governo</strong>.</p>
+                    <ul>
+                        <li><strong>Etimologia:</strong> A cobertura de cabeça cerimonial usada por bispos, simbolizando o "chapéu" do líder.</li>
+                        <li><strong>Simbolismo:</strong> Reconhecimento de hierarquia no ecossistema de Conselhos e Mentores.</li>
+                        <li><strong>Essência:</strong> Expressa a sobriedade de uma marca voltada à governança corporativa.</li>
+                        <li><strong style="color: #ef4444;">Status: Inviável.</strong> Pesquisa no INPI revelou impossibilidade de registro nas classes 35 (Consultoria) e 41 (Educação).</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="image-wrapper">
+                        <img src="http://googleusercontent.com/image_collection/image_retrieval/7965152408785374637" alt="Mitra and Roman Authority Symbols">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Variações Mitra -->
+    <section class="page-section">
+        <div class="content-wrapper">
+            <h2 class="section-title kinetic-text">Variações do Nome "Mitra"</h2>
+            <div class="tiled-content">
+                <div class="glass-panel">
+                    <div class="tile-icon"><i class="fa-solid fa-dna"></i></div>
+                    <h3>Derivações</h3>
+                    <p><strong>Mitrium:</strong> Adiciona um tom institucional, técnico e químico.<br><br><strong>Mitrax / Mitrona:</strong> Sugere força, fundação robusta e uma pegada mais moderna/tecnológica.</p>
+                </div>
+                <div class="glass-panel">
+                    <div class="tile-icon"><i class="fa-solid fa-link"></i></div>
+                    <h3>Compostos</h3>
+                    <p><strong>Mitracore:</strong> O "núcleo" da autoridade ou do governo estratégico.<br><br><strong>MitraNexus:</strong> O ponto central de conexão estrutural entre os líderes e a estratégia.</p>
+                </div>
+                <div class="glass-panel">
+                    <div class="tile-icon"><i class="fa-solid fa-chess-king"></i></div>
+                    <h3>Metáforas</h3>
+                    <p><strong>Tiara / Diadema:</strong> Simbolizam soberania e destaque.<br><br><strong>Regimen / Apex:</strong> O ponto mais alto, o cume da liderança e a direção absoluta de um sistema.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: O Conceito VIDI -->
+    <section class="page-section">
+        <div class="content-wrapper">
+            <h2 class="section-title kinetic-text">O Conceito "VIDI"</h2>
+            <div class="two-column">
+                <div style="order: 2;">
+                    <p>O nome <strong>VIDI</strong> traz uma carga semântica inegável de objetividade e clareza. Derivado do latim <em>Vider</em>, significa <strong>"Eu vi"</strong>, famoso por ser o elo central da frase de Júlio César: <em>"Veni, Vidi, Vici"</em>.</p>
+                    <ul>
+                        <li><strong>Diagnóstico:</strong> A etapa crucial de enxergar a realidade nua e crua antes da ação.</li>
+                        <li><strong>Consciência:</strong> Levar o mentorado a "ver" o oculto.</li>
+                        <li><strong>Viabilidade INPI:</strong> Potencialmente viável nas classes estratégicas, necessitando busca profunda na Classe 35 (Consultoria).</li>
+                    </ul>
+                </div>
+                <div style="order: 1;">
+                    <div class="image-wrapper">
+                        <img src="http://googleusercontent.com/image_collection/image_retrieval/7143460754188600665" alt="Julius Caesar Roman Bust">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Léxico Expandido -->
+    <section class="page-section">
+        <div class="content-wrapper">
+            <h2 class="section-title kinetic-text">Léxico Expandido: Governança Romana</h2>
+            <div class="two-column">
+                <div class="glass-panel" style="height: 100%;">
+                    <h3 style="color: var(--live-accent); margin-bottom: 20px; font-size: 28px;">Estruturas de Poder</h3>
+                    <p>Conceitos institucionais que inspiram a criação de hubs e conselhos de alto nível:</p>
+                    <ul>
+                        <li><strong>Cúria (Curia):</strong> Assembleia que representava a cúpula. A origem da "Cúpula do Governo".</li>
+                        <li><strong>Consilium:</strong> Conselho de assessores ou corpo deliberativo.</li>
+                        <li><strong>Senatus:</strong> O mais alto órgão de autoridade, transmitindo estabilidade.</li>
+                    </ul>
+                </div>
+                <div class="glass-panel" style="height: 100%;">
+                    <h3 style="color: var(--live-accent); margin-bottom: 20px; font-size: 28px;">Autoridade e Liderança</h3>
+                    <p>Atributos que definem a postura e o impacto dos mentores e líderes do projeto:</p>
+                    <ul>
+                        <li><strong>Auctoritas:</strong> O prestígio e a autoridade moral que faz os outros seguirem naturalmente.</li>
+                        <li><strong>Imperium:</strong> O poder supremo de comando e controle.</li>
+                        <li><strong>Rubicon:</strong> A coragem estratégica para o ponto sem volta.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: O Conceito Pantheon -->
+    <section class="page-section">
+        <div class="content-wrapper">
+            <h2 class="section-title kinetic-text">O Conceito "Pantheon"</h2>
+            <div class="two-column">
+                <div>
+                    <p>Do grego <em>Pan</em> (todos) e <em>Theos</em> (deuses). A conexão definitiva entre Cúpula, Visão, Autoridade e Conselho.</p>
+                    <ul>
+                        <li><strong>A Cúpula (Domus):</strong> O Panteão possui a maior cúpula de concreto não armado do mundo. É o símbolo máximo da Cúpula do Poder e de legado.</li>
+                        <li><strong>O Óculo (Visão):</strong> A única fonte de luz no topo, simbolizando o Olho do Céu e a clareza absoluta (forte ligação com VIDI).</li>
+                        <li><strong>Hub de Especialistas:</strong> O lugar de convergência onde "todos os deuses" (especialistas) se reúnem em harmonia geométrica.</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="image-wrapper">
+                        <img src="http://googleusercontent.com/image_collection/image_retrieval/14919934011943980920" alt="Pantheon Rome Interior Oculus">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: Etimologia Cúpula -->
+    <section class="page-section">
+        <div class="content-wrapper">
+            <h2 class="section-title kinetic-text">Etimologia de "Cúpula"</h2>
+            <div class="two-column rounded-image-layout">
+                <div style="order: 2;">
+                    <div class="glass-panel">
+                        <h3 style="color: var(--live-accent); margin-bottom: 20px; font-size: 28px;">O Simbolismo Arquitetônico</h3>
+                        <p>Deriva do latim <em>cupula</em> (pequena taça). Na arquitetura, representa a Abóbada Celeste e a tentativa de replicar o cosmo sob um teto humano.</p>
+                        <ul>
+                            <li><strong>Proteção:</strong> Sugere um ecossistema seguro e abrangente, abrigando quem está abaixo.</li>
+                            <li><strong>Convergência:</strong> Todas as linhas estruturais se encontram no topo, definindo foco.</li>
+                            <li><strong>Destaque:</strong> Define o horizonte, simbolizando uma marca que se sobrepõe à concorrência.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="order: 1; text-align: center;">
+                    <div class="image-wrapper">
+                        <img src="http://googleusercontent.com/image_collection/image_retrieval/5661627786007875056" alt="Architectural Dome Symmetrical" style="height: 100%;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7: Tabela de Candidatos -->
+    <section class="page-section">
+        <div class="content-wrapper">
+            <h2 class="section-title kinetic-text">Candidatos Avaliados (INPI)</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Status INPI</th>
+                            <th>Conceito / Observação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Tótem</strong></td>
+                            <td style="color: var(--live-accent); font-weight: 600;">Viável (Classe 41)</td>
+                            <td>Forte candidato. Ancestralidade e "pilar sagrado". Impacto visual.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sédia / Sedes</strong></td>
+                            <td style="color: #f59e0b; font-weight: 600;">Avaliado</td>
+                            <td>Refere-se a "assento" ou "base", mas com desafios de aceitação comercial.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sursum Corda</strong></td>
+                            <td style="color: var(--live-accent); font-weight: 600;">Registrável (41)</td>
+                            <td>"Corações ao Alto". Forte ligação litúrgica restringe o branding corporativo.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Invictos / Dux</strong></td>
+                            <td style="color: #ef4444; font-weight: 600;">Inviável</td>
+                            <td>Conflitos diretos de marcas ou excesso de registros no segmento.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 8: Decisão Final -->
+    <section class="page-section">
+        <div class="content-wrapper">
+            <h2 class="section-title kinetic-text">Decisão Final de Naming</h2>
+            <div class="highlight-numbers-layout">
+                <div class="highlight-card glass-panel">
+                    <div class="number kinetic-text">VIDI</div>
+                    <div class="number-label">Programa de Mentoria</div>
+                    <p style="margin-top: 20px; font-size: 16px;">O foco primordial no diagnóstico absoluto, na clareza estratégica e na visão ("Eu vi").</p>
+                </div>
+                <div class="highlight-card glass-panel">
+                    <div class="number kinetic-text">Cúpula CEO</div>
+                    <div class="number-label">Evento Presencial</div>
+                    <p style="margin-top: 20px; font-size: 16px;">O ápice da autoridade, montagem da estrutura de poder e assembleia dos líderes do ecossistema.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 9: Closure -->
+    <section class="page-section" style="border-bottom: none;">
+        <div class="content-wrapper closure-layout">
+            <h2 class="kinetic-text">"Veni, Vidi, Vici"</h2>
+            <p>Identidade corporativa, geométrica e minimalista aprovada.</p>
+            <div class="signature">
+                A perfeição está nos detalhes invisíveis.
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Footer -->
+    <footer class="global-footer">
+        <div class="footer-content">
+            <div>
+                <img class="footer-logo" src="https://raw.githubusercontent.com/Clebito2/ConsultoriaLive/main/Logo%20live%20oficial-21.png" alt="Live Consultoria Logo">
+            </div>
+            <div>
+                Sistema de Design V6.0 (Elite & AI-Driven)
+            </div>
+            <div>
+                &copy; Powered by <a href="mailto:cleberdonato@ecossistemalive.com.br">Cléber Donato</a>. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
+```
